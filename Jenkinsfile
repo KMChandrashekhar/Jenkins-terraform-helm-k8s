@@ -3,18 +3,11 @@ pipeline {
 
   environment {
     AWS_REGION = "ap-south-1"
-    ECR_REPO   = "<AWS_ACCOUNT_ID>.dkr.ecr.ap-south-1.amazonaws.com/java-app"
+    ECR_REPO   = "180294219747.dkr.ecr.ap-south-1.amazonaws.com/my-ecr-repo"
     CLUSTER    = "demo-eks"
   }
 
   stages {
-
-    stage('Checkout') {
-      steps {
-        git branch: 'main',
-            url: 'https://github.com/<YOUR_GITHUB_USERNAME>/eks-jenkins-helm-project.git'
-      }
-    }
 
     stage('Build Docker Image') {
       steps {
@@ -50,7 +43,7 @@ pipeline {
     stage('Deploy using Helm') {
       steps {
         sh '''
-        helm upgrade --install java-app helm-chart \
+        helm upgrade --install my-app helm-chart \
           --set image.repository=$ECR_REPO \
           --set image.tag=latest
         '''
