@@ -1,0 +1,10 @@
+replicaCount: 2
+
+image:
+  repository: 180294219747.dkr.ecr.ap-south-1.amazonaws.com/my-ecr-repo
+  tag: latest
+
+service:
+  type: LoadBalancer
+  port: 8080
+  targetPort: 8080
